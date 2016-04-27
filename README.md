@@ -1,2 +1,2 @@
 # keras-squeezenet
-SqueezeNet Implementation with keras framework 1.0
+SqueezeNet Implementation using keras Functional Framework 1.0
