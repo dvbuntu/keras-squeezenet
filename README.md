@@ -6,7 +6,7 @@ SqueezeNet Implementation using Keras Functional Framework 1.0
 
 - [x] Implement Functions
 - [x] Add References
-- [x] Add Model Visual Architecture
+- [x] Add Model Visual Architecture [image](https://github.com/Refikcanmalli/keras-squeezenet/blob/master/images/SqueezeNet.png)
 - [ ] Share Pretrained Models
 - [ ] Share Loss Graphs
 
