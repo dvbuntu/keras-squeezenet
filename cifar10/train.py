@@ -5,6 +5,9 @@ from keras.utils import np_utils
 import numpy as np
 import models
 
+# training setup from keras/examples.
+
+
 batch_size = 32
 nb_classes = 10
 nb_epoch = 200
