@@ -45,11 +45,14 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
+checkpointer = ModelCheckpoint(filepath="small_sqn_model_best.hdf5", verbose=1, save_best_only=True)
+
 if not data_augmentation:
     print('Not using data augmentation.')
     model.fit(X_train, Y_train,
               batch_size=batch_size,
               nb_epoch=nb_epoch,
+              callbacks=[checkpointer],
               validation_data=(X_test, Y_test),
               shuffle=True)
 else:
@@ -78,5 +81,6 @@ else:
     model.fit_generator(datagen.flow(X_train, Y_train,
                         batch_size=batch_size),
                         samples_per_epoch=X_train.shape[0],
-                        nb_epoch=nb_epoch,callbacks=[checkpointer],
+                        nb_epoch=nb_epoch,
+                        callbacks=[checkpointer],
                         validation_data=(X_test, Y_test))
