@@ -20,7 +20,7 @@ def fire_module(x, squeeze=16, expand=64):
     return x
 
 
-# Original SqueezeNet from paper. Global Average Pool implemented manually
+# Original SqueezeNet from paper. Global Average Pool implemented manually with Average Pooling Layer
 
 def get_squeezenet(nb_classes):
 
@@ -63,12 +63,12 @@ def get_small_squeezenet(nb_classes):
     x = Activation('relu')(x)
     x = MaxPooling2D(pool_size=(3, 3))(x)
 
-    x = fire_module(x, 16, 64)
+    x = fire_module(x, 32, 128)
     x = fire_module(x, 32, 128)
     x = MaxPooling2D(pool_size=(2, 2))(x)
 
     x = fire_module(x, 48, 192)
-    x = fire_module(x, 64, 256)
+    x = fire_module(x, 48, 192)
     x = MaxPooling2D(pool_size=(2, 2))(x)
 
     x = fire_module(x, 64, 256)
@@ -87,6 +87,27 @@ def get_small_squeezenet(nb_classes):
 
 
 if __name__ == '__main__':
+    import time
+    import os
+    from keras.utils.visualize_util import plot
 
-    model1 = get_squeezenet(1000)
-    model2 = get_small_squeezenet(10)
+    start = time.time()
+    model = get_squeezenet(1000)
+    #model = get_small_squeezenet(10)
+
+    duration = time.time() - start
+    print "{} s to make model".format(duration)
+
+    start = time.time()
+    model.output
+    duration = time.time() - start
+    print "{} s to get output".format(duration)
+
+    start = time.time()
+    model.compile(loss="categorical_crossentropy", optimizer="adam")
+    duration = time.time() - start
+    print "{} s to get compile".format(duration)
+
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    model_path = os.path.join(current_dir, "SqueezeNet.png")
+    plot(model, to_file=model_path, show_shapes=True)
