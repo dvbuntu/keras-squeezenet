@@ -2,7 +2,7 @@
 SqueezeNet Implementation using Keras Functional Framework 1.0
 
 
-### TODOs
+### Roadmap
 
 - [x] Implement Functions
 - [x] Add References
