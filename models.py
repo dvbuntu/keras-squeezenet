@@ -1,4 +1,4 @@
-from keras.models import Model
+from keras.models import Model, model_from_json
 from keras.layers import Input, merge, AveragePooling2D
 from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.layers.core import Dense, Dropout, Activation, Flatten
@@ -53,6 +53,12 @@ def get_squeezenet(nb_classes):
     model = Model(input=input_img, output=[out])
     return model
 
+
+def get_pretrained_squeezenet(model_path, weights_path):
+
+    model = model_from_json(open(model_path).read())
+    model.load_weights(weights_path)
+    return model
 
 # Experimental network design for small images !
 
